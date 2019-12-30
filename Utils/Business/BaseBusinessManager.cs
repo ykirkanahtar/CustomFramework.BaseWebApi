@@ -12,19 +12,19 @@ namespace CustomFramework.BaseWebApi.Utils.Business
 {
     public abstract class BaseBusinessManager
     {
-        private readonly ILogger<BaseBusinessManager> _logger;
+        protected readonly ILogger<BaseBusinessManager> Logger;
         protected readonly IMapper Mapper;
         private readonly int _userId;
 
         protected BaseBusinessManager(ILogger<BaseBusinessManager> logger, IMapper mapper)
         {
-            _logger = logger;
+            Logger = logger;
             Mapper = mapper;
         }
 
         protected BaseBusinessManager(ILogger<BaseBusinessManager> logger, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
-            _logger = logger;
+            Logger = logger;
             Mapper = mapper;
 
             if (httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier) != null)
@@ -40,7 +40,7 @@ namespace CustomFramework.BaseWebApi.Utils.Business
             }
             catch (Exception ex)
             {
-                _logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
+                Logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
                 throw;
             }
         }
@@ -56,7 +56,7 @@ namespace CustomFramework.BaseWebApi.Utils.Business
             }
             catch (Exception ex)
             {
-                _logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
+                Logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
                 throw;
             }
         }
@@ -72,7 +72,7 @@ namespace CustomFramework.BaseWebApi.Utils.Business
             }
             catch (Exception ex)
             {
-                _logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
+                Logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
                 throw;
             }
         }
@@ -85,7 +85,7 @@ namespace CustomFramework.BaseWebApi.Utils.Business
             }
             catch (Exception ex)
             {
-                _logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
+                Logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
                 throw;
             }
         }
@@ -101,7 +101,7 @@ namespace CustomFramework.BaseWebApi.Utils.Business
             }
             catch (Exception ex)
             {
-                _logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
+                Logger.LogError(0, ex, $"{DefaultResponseMessages.AnErrorHasOccured} - {ex.Message}");
                 throw;
             }
         }
@@ -115,7 +115,7 @@ namespace CustomFramework.BaseWebApi.Utils.Business
             }
             catch (Exception ex)
             {
-                _logger.LogError(0, ex, $"{ex.Message}");
+                Logger.LogError(0, ex, $"{ex.Message}");
                 throw;
             }
         }
