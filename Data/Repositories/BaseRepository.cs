@@ -3,7 +3,6 @@ using System;
 using CustomFramework.BaseWebApi.Data.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Query;
-using CustomFramework.BaseWebApi.Resources;
 using CustomFramework.BaseWebApi.Contracts;
 
 namespace CustomFramework.BaseWebApi.Data.Repositories
@@ -36,7 +35,7 @@ namespace CustomFramework.BaseWebApi.Data.Repositories
                 {
                     case EntityState.Added:
                         entry.CurrentValues["CreateUserId"] = userId;
-                        entry.CurrentValues["CreateDateTime"] = DateTime.UtcNow;
+                        entry.CurrentValues["CreateDateTime"] = logDateTime != null ? (DateTime)logDateTime : DateTime.UtcNow;
                         entry.CurrentValues["Status"] = Status.Active;
                         break;                      
                 }
@@ -88,7 +87,7 @@ namespace CustomFramework.BaseWebApi.Data.Repositories
                 {
                     case EntityState.Deleted:
                         entry.CurrentValues["DeleteUserId"] = userId;
-                        entry.CurrentValues["DeleteDateTime"] = DateTime.UtcNow;
+                        entry.CurrentValues["DeleteDateTime"] = logDateTime != null ? (DateTime)logDateTime : DateTime.UtcNow;
                         entry.CurrentValues["Status"] = Status.Deleted;
                         entry.State = EntityState.Modified;
                         break;                      
