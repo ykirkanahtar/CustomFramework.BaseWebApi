@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CustomFramework.BaseWebApi.Contracts.ApiContracts;
 using CustomFramework.BaseWebApi.Data.Contracts;
 using CustomFramework.BaseWebApi.Identity.Models;
 using Microsoft.AspNetCore.Identity;

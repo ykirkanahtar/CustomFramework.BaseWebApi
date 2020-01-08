@@ -19,9 +19,9 @@ using CustomFramework.BaseWebApi.Identity.Data.Repositories;
 using CustomFramework.EmailProvider;
 using CustomFramework.BaseWebApi.Resources;
 using CustomFramework.BaseWebApi.Utils.Utils;
-using CustomFramework.BaseWebApi.Data.Contracts;
 using CustomFramework.BaseWebApi.Utils.Business;
 using CustomFramework.BaseWebApi.Contracts;
+using CustomFramework.BaseWebApi.Contracts.ApiContracts;
 
 namespace CustomFramework.BaseWebApi.Identity.Business
 {

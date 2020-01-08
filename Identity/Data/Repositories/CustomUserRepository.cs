@@ -7,6 +7,7 @@ using CustomFramework.BaseWebApi.Data.Contracts;
 using CustomFramework.BaseWebApi.Resources;
 using CustomFramework.BaseWebApi.Data.Utils;
 using CustomFramework.BaseWebApi.Contracts;
+using CustomFramework.BaseWebApi.Contracts.ApiContracts;
 
 namespace CustomFramework.BaseWebApi.Identity.Data.Repositories
 {
@@ -27,7 +28,7 @@ namespace CustomFramework.BaseWebApi.Identity.Data.Repositories
                          && SqlServerDbFunctionsExtensions.DateDiffMinute(EF.Functions, u.LastSuccessfullLogin, DateTimeNowValue ?? DateTime.Now) < sessionMinutes
                          && u.LastSuccessfullLogin > u.LastLogOutDate
                          select u);
-            return await query.GetCustomListFromQueryAsync(new Paging(pageIndex, pageSize));
+            return await query.ToCustomListAsync(new Paging(pageIndex, pageSize));
         }
     }
 }

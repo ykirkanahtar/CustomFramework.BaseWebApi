@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using CustomFramework.BaseWebApi.Identity.Models;
 using System;
 using CustomFramework.BaseWebApi.Data.Contracts;
+using CustomFramework.BaseWebApi.Contracts.ApiContracts;
 
 namespace CustomFramework.BaseWebApi.Identity.Data.Repositories
 {
