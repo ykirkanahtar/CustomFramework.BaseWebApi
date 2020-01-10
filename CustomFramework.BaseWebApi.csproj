@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.0" />
-    <!-- <PackageReference Include="CustomFramework.BaseWebApi.Contracts" Version="1.0.0" /> -->
+    <PackageReference Include="CustomFramework.BaseWebApi.Contracts" Version="1.0.1" />
     <PackageReference Include="CustomFramework.EmailProvider" Version="1.0.0" />
     <PackageReference Include="CustomFramework.Utils" Version="1.0.5" />
     <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.17" />
@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <!-- <ProjectReference Include="..\..\AspNetCore\src\Identity\Extensions.Core\src\Microsoft.Extensions.Identity.Core.csproj" /> -->
-    <ProjectReference Include="..\CustomFramework.BaseWebApi.Contracts\CustomFramework.BaseWebApi.Contracts.csproj" />
+    <!-- <ProjectReference Include="..\CustomFramework.BaseWebApi.Contracts\CustomFramework.BaseWebApi.Contracts.csproj" /> -->
   </ItemGroup>  
 
 </Project>
