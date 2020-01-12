@@ -26,13 +26,14 @@ namespace CustomFramework.BaseWebApi.Data.Utils
             };
         }
 
-        public static async Task<ICustomList<T>> ToCustomListAsync<T>(this IQueryable<T> query, Paging paging, string orderBy = null) where T : class
+        public static async Task<ICustomList<T>> ToCustomListAsync<T>(this IQueryable<T> query, Paging paging, Sorting sorting = null) where T : class
         {
             int rowCount = query.Count();
 
-            if(!String.IsNullOrEmpty(orderBy))
+            if (sorting != null)
             {
-                query = query.OrderBy(orderBy);
+                var sortingQuery = sorting.Ascending ? sorting.FieldName : $"{sorting.FieldName} descending";
+                query = query.OrderBy(sortingQuery);
             }
 
             query = query.Skip(Math.Abs(paging.PageIndex - 1) * paging.PageSize).Take(paging.PageSize);

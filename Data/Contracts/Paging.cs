@@ -8,7 +8,7 @@ namespace CustomFramework.BaseWebApi.Data.Contracts
         {
             if (pageIndex == 0) throw new ArgumentException("PageIndexCanNotBeZero");
             if (pageSize == 0) throw new ArgumentException("PageSizeCanNotBeZero");
-            
+
             PageIndex = pageIndex;
             PageSize = pageSize;
         }
