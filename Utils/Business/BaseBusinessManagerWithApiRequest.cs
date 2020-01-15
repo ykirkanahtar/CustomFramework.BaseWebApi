@@ -26,5 +26,16 @@ namespace CustomFramework.BaseWebApi.Utils.Business
             if(_apiRequestAccessor == null) return returnValue;
             return _apiRequestAccessor.UserId;
         }
+
+        protected int GetClientApplicationId()
+        {
+            return _apiRequestAccessor.ClientApplicationId;
+        }
+
+        protected int? GetNullableClientApplicationId()
+        {
+            if (_apiRequestAccessor == null) return null;
+            return _apiRequestAccessor.ClientApplicationId;
+        }        
     }
 }

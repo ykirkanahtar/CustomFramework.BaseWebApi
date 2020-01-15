@@ -18,6 +18,10 @@ namespace CustomFramework.BaseWebApi.Data.ModelConfiguration
 
             builder.Property(p => p.DeleteDateTime);
 
+            builder.Property(p => p.CreateClientApplicationId);
+            builder.Property(p => p.UpdateClientApplicationId);
+            builder.Property(p => p.DeleteClientApplicationId);
+
             builder.Property(p => p.Status)
                 .IsRequired();
 
