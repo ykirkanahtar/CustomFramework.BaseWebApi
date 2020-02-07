@@ -19,19 +19,19 @@ namespace CustomFramework.BaseWebApi.Data.Utils
 
         private static readonly PropertyInfo DatabaseDependenciesField = typeof(Database).GetTypeInfo().DeclaredProperties.Single(x => x.Name == "Dependencies");
 
-        public static string ToSql<TEntity>(this IQueryable<TEntity> query) where TEntity : class
-        {
-            var queryCompiler = (QueryCompiler)QueryCompilerField.GetValue(query.Provider);
-            var modelGenerator = (QueryModelGenerator)QueryModelGeneratorField.GetValue(queryCompiler);
-            var queryModel = modelGenerator.ParseQuery(query.Expression);
-            var database = (IDatabase)DataBaseField.GetValue(queryCompiler);
-            var databaseDependencies = (DatabaseDependencies)DatabaseDependenciesField.GetValue(database);
-            var queryCompilationContext = databaseDependencies.QueryCompilationContextFactory.Create(false);
-            var modelVisitor = (RelationalQueryModelVisitor)queryCompilationContext.CreateQueryModelVisitor();
-            modelVisitor.CreateQueryExecutor<TEntity>(queryModel);
-            var sql = modelVisitor.Queries.First().ToString();
+        // public static string ToSql<TEntity>(this IQueryable<TEntity> query) where TEntity : class
+        // {
+        //     var queryCompiler = (QueryCompiler)QueryCompilerField.GetValue(query.Provider);
+        //     var modelGenerator = (QueryModelGenerator)QueryModelGeneratorField.GetValue(queryCompiler);
+        //     var queryModel = modelGenerator.ParseQuery(query.Expression);
+        //     var database = (IDatabase)DataBaseField.GetValue(queryCompiler);
+        //     var databaseDependencies = (DatabaseDependencies)DatabaseDependenciesField.GetValue(database);
+        //     var queryCompilationContext = databaseDependencies.QueryCompilationContextFactory.Create(false);
+        //     var modelVisitor = (RelationalQueryModelVisitor)queryCompilationContext.CreateQueryModelVisitor();
+        //     modelVisitor.CreateQueryExecutor<TEntity>(queryModel);
+        //     var sql = modelVisitor.Queries.First().ToString();
 
-            return sql;
-        }
+        //     return sql;
+        // }
     }
 }

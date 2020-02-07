@@ -16,7 +16,7 @@ namespace CustomFramework.BaseWebApi.Data
         private bool _disposed;
         private Dictionary<Type, object> _repositories;
 
-        protected UnitOfWork(TContext context)
+        public UnitOfWork(TContext context)
         {
             DbContext = context ?? throw new ArgumentNullException(nameof(context));
         }
@@ -55,9 +55,9 @@ namespace CustomFramework.BaseWebApi.Data
             return (BaseRepositoryNonUser<TEntity, TKey>)_repositories[type];
         }
 
-        public int ExecuteSqlCommand(string sql, params object[] parameters) => DbContext.Database.ExecuteSqlCommand(sql, parameters);
+        public int ExecuteSqlCommand(string sql, params object[] parameters) => DbContext.Database.ExecuteSqlRaw(sql, parameters);
 
-        public IQueryable<TEntity> FromSql<TEntity>(string sql, params object[] parameters) where TEntity : class => DbContext.Set<TEntity>().FromSql(sql, parameters);
+        public IQueryable<TEntity> FromSql<TEntity>(string sql, params object[] parameters) where TEntity : class => DbContext.Set<TEntity>().FromSqlRaw(sql, parameters);
 
         public int SaveChanges()
         {

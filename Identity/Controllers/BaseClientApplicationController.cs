@@ -1,14 +1,11 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using CustomFramework.BaseWebApi.Authorization.Attributes;
-using CustomFramework.BaseWebApi.Authorization.Enums;
 using CustomFramework.BaseWebApi.Resources;
 using CustomFramework.BaseWebApi.Contracts.Requests;
 using CustomFramework.BaseWebApi.Contracts.Responses;
 using CustomFramework.BaseWebApi.Identity.Business;
 using CustomFramework.BaseWebApi.Identity.Models;
 using CustomFramework.BaseWebApi.Utils.Contracts;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -26,7 +23,6 @@ namespace CustomFramework.BaseWebApi.Identity.Controllers
 
         [Route("create")]
         [HttpPost]
-        [Permission(nameof(ClientApplication), Crud.Create)]
         public async virtual Task<IActionResult> CreateAsync([FromBody] ClientApplicationRequest request)
         {
             return await BaseCreateAsync(request);
@@ -34,7 +30,6 @@ namespace CustomFramework.BaseWebApi.Identity.Controllers
 
         [Route("delete/{id:int}")]
         [HttpDelete]
-        [Permission(nameof(ClientApplication), Crud.Delete)]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             return await BaseDeleteAsync(id);
@@ -42,7 +37,6 @@ namespace CustomFramework.BaseWebApi.Identity.Controllers
 
         [Route("get/id/{id}")]
         [HttpGet]
-        [Permission(nameof(ClientApplication), Crud.Select)]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             return await BaseGetByIdAsync(id);
@@ -50,7 +44,6 @@ namespace CustomFramework.BaseWebApi.Identity.Controllers
 
         [Route("{id:int}/update")]
         [HttpPut]
-        [Permission(nameof(ClientApplication), Crud.Update)]
         public Task<IActionResult> UpdateClientApplicationNameAsync(int id, [FromBody] ClientApplicationUpdateRequest request)
         {
             return CommonOperationAsync<IActionResult>(async () =>
@@ -63,8 +56,6 @@ namespace CustomFramework.BaseWebApi.Identity.Controllers
 
         [Route("{id:int}/update/clientApplicationPassword")]
         [HttpPut]
-        [AllowAnonymous]
-        [Permission(nameof(ClientApplication), Crud.Update)]
         public Task<IActionResult> UpdateClientApplicationPasswordAsync(int id, [FromBody] string clientApplicationPassword)
         {
             return CommonOperationAsync<IActionResult>(async () =>
@@ -77,7 +68,6 @@ namespace CustomFramework.BaseWebApi.Identity.Controllers
 
         [Route("get/clientapplicationcode/{clientApplicationCode}")]
         [HttpGet]
-        [Permission(nameof(ClientApplication), Crud.Select)]
         public Task<IActionResult> GetByClientApplicationCodeAsync(string clientApplicationCode)
         {
             return CommonOperationAsync<IActionResult>(async () =>

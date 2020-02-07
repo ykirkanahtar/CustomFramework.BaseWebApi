@@ -9,7 +9,7 @@ namespace CustomFramework.BaseWebApi.Data.ModelConfiguration
     {
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(p => p.Id).UseSqlServerIdentityColumn();
+            builder.Property(p => p.Id).UseIdentityColumn();
 
             builder.Property(p => p.CreateDateTime)
                 .IsRequired();
