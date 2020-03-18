@@ -1,5 +1,5 @@
 using System;
-using CustomFramework.Utils;
+using CustomFramework.BaseWebApi.Utils.Utils;
 
 namespace CustomFramework.BaseWebApi.Identity.Constants
 {

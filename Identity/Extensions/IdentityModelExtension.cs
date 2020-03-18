@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CustomFramework.BaseWebApi.Authorization.Utils;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace CustomFramework.BaseWebApi.Identity.Extensions
 {
@@ -18,7 +22,7 @@ namespace CustomFramework.BaseWebApi.Identity.Extensions
         where TContext : DbContext
     {
         public static IdentityModel IdentityConfig { get; set; }
-        public static IServiceCollection AddIdentityModel(IServiceCollection services, IdentityModel identityModel, Token token, bool requireConfirmedEmail)
+        public static IServiceCollection AddIdentityModel(IServiceCollection services, IdentityModel identityModel, bool requireConfirmedEmail, Type tokenProviderType, string tokenProviderName)
         {
             IdentityConfig = identityModel;
 
@@ -38,15 +42,20 @@ namespace CustomFramework.BaseWebApi.Identity.Extensions
             services.AddIdentity<TUser, TRole>(config =>
                 {
                     config.SignIn.RequireConfirmedEmail = requireConfirmedEmail;
+                    config.Tokens.ProviderMap.Add(tokenProviderName,
+                        new TokenProviderDescriptor(tokenProviderType));
+                    config.Tokens.EmailConfirmationTokenProvider = tokenProviderName;
+                    config.Tokens.PasswordResetTokenProvider = tokenProviderName;
+                    config.Tokens.ChangeEmailTokenProvider = tokenProviderName;
                 })
+                .AddRoles<TRole>()
                 .AddEntityFrameworkStores<TContext>()
-                .AddErrorDescriber<MultilanguageIdentityErrorDescriber>()
-                .AddDefaultTokenProviders();
+                .AddErrorDescriber<MultilanguageIdentityErrorDescriber>();
+            //.AddDefaultTokenProviders();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
 
             return services;
         }
     }
-
 }

@@ -28,6 +28,12 @@ namespace CustomFramework.BaseWebApi.Utils.Middlewares
             try
             {
                 await _next.Invoke(context);
+
+                if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
+                {
+                    throw new UnauthorizedAccessException();
+                }
+
             }
             catch (Exception ex)
             {
@@ -46,7 +52,7 @@ namespace CustomFramework.BaseWebApi.Utils.Middlewares
                 //    errorMessage = DefaultResponseMessages.DbConnectionError;
                 //}
 
-                if(errorMessage.Contains("is not allowed to connect to this MySQL server"))
+                if (errorMessage.Contains("is not allowed to connect to this MySQL server"))
                 {
                     errorMessage = DefaultResponseMessages.DbConnectionError;
                 }
